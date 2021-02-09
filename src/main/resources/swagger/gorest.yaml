@@ -1,0 +1,153 @@
+openapi: 3.0.1
+info:
+  title: ''
+  description: ''
+  version: 1.0.0
+servers:
+  - url: https://gorest.co.in/public-api
+tags:
+  - name: users
+paths:
+  /users:
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - users
+      summary: Create user
+      operationId: createUser
+      requestBody:
+        description: Created user object
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/CreatableUser'
+      responses:
+        default:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+    get:
+      tags:
+        - users
+      summary: Get all users
+      operationId: getUsersList
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsersResponse'
+
+  /users/{userId}:
+    get:
+      tags:
+        - users
+      summary: Get user by user Id
+      operationId: getUserById
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    UserResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+        meta:
+          type: object
+        data:
+          $ref: '#/components/schemas/SearchableUser'
+    UsersResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+        meta:
+          $ref: '#/components/schemas/UsersResponseMeta'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchableUser'
+    UsersResponseMeta:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/UsersResponseMetaPagination'
+    UsersResponseMetaPagination:
+      type: object
+      properties:
+        total:
+          type: integer
+        pages:
+          type: integer
+        page:
+          type: integer
+        limit:
+          type: integer
+    User:
+      type: object
+      properties:
+        name:
+          type: string
+        gender:
+          $ref: '#/components/schemas/UserGender'
+        email:
+          type: string
+        status:
+          $ref: '#/components/schemas/UserStatus'
+    SearchableUser:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/User'
+        - properties:
+            id:
+              type: integer
+              format: int64
+            created_at:
+              type: string
+              format: date-time
+            updated_at:
+              type: string
+              format: date-time
+    CreatableUser:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/User'
+    UserGender:
+      type: string
+      enum:
+        - Male
+        - Female
+    UserStatus:
+      type: string
+      enum:
+        - Active
+        - Inactive
