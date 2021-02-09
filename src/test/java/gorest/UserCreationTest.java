@@ -45,9 +45,6 @@ public class UserCreationTest {
     @Feature("Демо для будущих коллег")
 
     public void checkUserCreation() {
-        //log.info("HELLO WORLD");
-        //UserResponse response = userHelper.createUser(userUtils.getCommonFemaleUserModel());
-        //UserResponse response = userHelper.createUser(userUtils.getRandomActiveMaleUserModel());
 
         CreatableUser newUserModel = userUtils.getRandomActiveMaleUserModel();
         UserResponse response = userHelper.createUser(newUserModel);
@@ -58,19 +55,15 @@ public class UserCreationTest {
                             () -> assertThat(response.getCode(),
                                     allureLogger.logMatcherWithText("Запрос выполнен, код ответа совпадает с ожидаемым",
                                             equalTo(201))),
-
                             () -> assertThat(response.getData().getName(),
                                     allureLogger.logMatcherWithText("Имя пользователя из ответа совпадает с именем из запроса",
                                             equalTo(newUserModel.getName()))),
-
                             () -> assertThat(response.getData().getEmail(),
                                     allureLogger.logMatcherWithText("email пользователя из ответа совпадает с email из запроса",
                                             equalTo(newUserModel.getEmail()))),
-
                             () -> assertThat(response.getData().getGender(),
                                     allureLogger.logMatcherWithText("gender пользователя из ответа совпадает с gender из запроса",
                                             equalTo(newUserModel.getGender()))),
-
                             () -> assertThat(response.getData().getStatus(),
                                     allureLogger.logMatcherWithText("status пользователя из ответа совпадает с status из запроса",
                                             equalTo(newUserModel.getStatus()))));

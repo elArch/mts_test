@@ -12,7 +12,7 @@ public class UserUtils {
     public CreatableUser getCommonMaleUserModel() {
         CreatableUser model = new CreatableUser();
         model.setName("John Doe");
-        model.setEmail("johndoew@neverwhere");
+        model.setEmail("johndoew@never.where");
         model.setGender(UserGender.MALE);
         model.setStatus(UserStatus.ACTIVE);
         return model;
@@ -21,18 +21,18 @@ public class UserUtils {
     public CreatableUser getCommonFemaleUserModel() {
         CreatableUser model = new CreatableUser();
         model.setName("Joahn Doe");
-        model.setEmail("joahndoew@neverwhere");
+        model.setEmail("joahndoew@never.where");
         model.setGender(UserGender.FEMALE);
         model.setStatus(UserStatus.INACTIVE);
         return model;
     }
 
     public CreatableUser getRandomActiveMaleUserModel() {
-        String name = faker.name().fullName();
         String firstName = faker.name().firstName();
         String lastName = faker.name().lastName();
         String fullName = firstName + " " + lastName;
-        String email = firstName + "." + lastName + "@email.test";
+        String email = firstName + "." + lastName + "@never.where";
+
         CreatableUser model = new CreatableUser();
         model.setName(fullName);
         model.setEmail(email);
