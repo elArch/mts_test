@@ -21,7 +21,7 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 
-public class UserCreationTest {
+public class UserReceptionByIdTest {
 
     UsersApi usersApi;
     UserUtils userUtils;
@@ -39,8 +39,8 @@ public class UserCreationTest {
     }
 
     @Test
-    @DisplayName("Создание нового пользователя")
-    @AllureId("1")
+    @DisplayName("Получение пользователя по его id")
+    @AllureId("2")
     @Epic("Получить работу в МТС")
     @Feature("Демо для будущих коллег")
     public void checkUserCreation() {
@@ -52,27 +52,35 @@ public class UserCreationTest {
         assertThat(createdUser.getData(),
                 allureLogger.logMatcherWithText("Объект создан и не пуст", is(notNullValue())));
 
-        step("Проверяем что метод создания пользователя был выполнен, код ответа и поля обекта совпадают с ожидаемыми", () ->
+        UserResponse returnedUser = userHelper.getUser(createdUser.getData().getId());
+
+        step("Проверяем что метод был выполнен, код ответа и поля обекта совпадают с ожидаемыми", () ->
                 {
                     assertAll(
-                            () -> assertThat(createdUser.getCode(),
+                            () -> assertThat(returnedUser.getCode(),
                                     allureLogger.logMatcherWithText("Запрос выполнен, код ответа совпадает с ожидаемым",
-                                            equalTo(201))),
-                            () -> assertThat(createdUser.getData().getName(),
+                                            equalTo(200))),
+                            () -> assertThat(returnedUser.getData().getName(),
                                     allureLogger.logMatcherWithText("Имя пользователя из ответа совпадает с именем из запроса",
-                                            equalTo(newUserModel.getName()))),
-                            () -> assertThat(createdUser.getData().getEmail(),
+                                            equalTo(createdUser.getData().getName()))),
+                            () -> assertThat(returnedUser.getData().getEmail(),
                                     allureLogger.logMatcherWithText("email пользователя из ответа совпадает с email из запроса",
-                                            equalTo(newUserModel.getEmail()))),
-                            () -> assertThat(createdUser.getData().getGender(),
+                                            equalTo(createdUser.getData().getEmail()))),
+                            () -> assertThat(returnedUser.getData().getGender(),
                                     allureLogger.logMatcherWithText("gender пользователя из ответа совпадает с gender из запроса",
-                                            equalTo(newUserModel.getGender()))),
-                            () -> assertThat(createdUser.getData().getStatus(),
+                                            equalTo(createdUser.getData().getGender()))),
+                            () -> assertThat(returnedUser.getData().getStatus(),
                                     allureLogger.logMatcherWithText("status пользователя из ответа совпадает с status из запроса",
-                                            equalTo(newUserModel.getStatus()))));
+                                            equalTo(createdUser.getData().getStatus()))),
+                            () -> assertThat(returnedUser.getData().getCreatedAt(),
+                                    allureLogger.logMatcherWithText("Дата создания пользователя отлична от NULL", is(notNullValue()))),
+                            () -> assertThat(returnedUser.getData().getUpdatedAt(),
+                                    allureLogger.logMatcherWithText("Дата последнего обновления пользователя отлична от", is(notNullValue()))));
                 }
         );
 
-
     }
 }
+
+
+
