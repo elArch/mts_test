@@ -22,7 +22,6 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 
 public class UserCreationTest {
-
     UsersApi usersApi;
     UserUtils userUtils;
     UserHelper userHelper;
@@ -52,27 +51,23 @@ public class UserCreationTest {
         assertThat(createdUser.getData(),
                 allureLogger.logMatcherWithText("Объект создан и не пуст", is(notNullValue())));
 
-        step("Проверяем что метод создания пользователя был выполнен, код ответа и поля обекта совпадают с ожидаемыми", () ->
-                {
-                    assertAll(
-                            () -> assertThat(createdUser.getCode(),
-                                    allureLogger.logMatcherWithText("Запрос выполнен, код ответа совпадает с ожидаемым",
-                                            equalTo(201))),
-                            () -> assertThat(createdUser.getData().getName(),
-                                    allureLogger.logMatcherWithText("Имя пользователя из ответа совпадает с именем из запроса",
-                                            equalTo(newUserModel.getName()))),
-                            () -> assertThat(createdUser.getData().getEmail(),
-                                    allureLogger.logMatcherWithText("email пользователя из ответа совпадает с email из запроса",
-                                            equalTo(newUserModel.getEmail()))),
-                            () -> assertThat(createdUser.getData().getGender(),
-                                    allureLogger.logMatcherWithText("gender пользователя из ответа совпадает с gender из запроса",
-                                            equalTo(newUserModel.getGender()))),
-                            () -> assertThat(createdUser.getData().getStatus(),
-                                    allureLogger.logMatcherWithText("status пользователя из ответа совпадает с status из запроса",
-                                            equalTo(newUserModel.getStatus()))));
-                }
-        );
-
-
+        step("Проверяем что метод создания пользователя был выполнен, код ответа и поля обекта совпадают с ожидаемыми", () -> {
+            assertAll(
+                    () -> assertThat(createdUser.getCode(),
+                            allureLogger.logMatcherWithText("Запрос выполнен, код ответа совпадает с ожидаемым",
+                                    equalTo(201))),
+                    () -> assertThat(createdUser.getData().getName(),
+                            allureLogger.logMatcherWithText("Имя пользователя из ответа совпадает с именем из запроса",
+                                    equalTo(newUserModel.getName()))),
+                    () -> assertThat(createdUser.getData().getEmail(),
+                            allureLogger.logMatcherWithText("email пользователя из ответа совпадает с email из запроса",
+                                    equalTo(newUserModel.getEmail()))),
+                    () -> assertThat(createdUser.getData().getGender(),
+                            allureLogger.logMatcherWithText("gender пользователя из ответа совпадает с gender из запроса",
+                                    equalTo(newUserModel.getGender()))),
+                    () -> assertThat(createdUser.getData().getStatus(),
+                            allureLogger.logMatcherWithText("status пользователя из ответа совпадает с status из запроса",
+                                    equalTo(newUserModel.getStatus()))));
+        });
     }
 }

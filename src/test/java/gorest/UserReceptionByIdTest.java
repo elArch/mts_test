@@ -22,7 +22,6 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 
 public class UserReceptionByIdTest {
-
     UsersApi usersApi;
     UserUtils userUtils;
     UserHelper userHelper;
@@ -54,31 +53,28 @@ public class UserReceptionByIdTest {
 
         UserResponse returnedUser = userHelper.getUser(createdUser.getData().getId());
 
-        step("Проверяем что метод был выполнен, код ответа и поля обекта совпадают с ожидаемыми", () ->
-                {
-                    assertAll(
-                            () -> assertThat(returnedUser.getCode(),
-                                    allureLogger.logMatcherWithText("Запрос выполнен, код ответа совпадает с ожидаемым",
-                                            equalTo(200))),
-                            () -> assertThat(returnedUser.getData().getName(),
-                                    allureLogger.logMatcherWithText("Имя пользователя из ответа совпадает с именем из запроса",
-                                            equalTo(createdUser.getData().getName()))),
-                            () -> assertThat(returnedUser.getData().getEmail(),
-                                    allureLogger.logMatcherWithText("email пользователя из ответа совпадает с email из запроса",
-                                            equalTo(createdUser.getData().getEmail()))),
-                            () -> assertThat(returnedUser.getData().getGender(),
-                                    allureLogger.logMatcherWithText("gender пользователя из ответа совпадает с gender из запроса",
-                                            equalTo(createdUser.getData().getGender()))),
-                            () -> assertThat(returnedUser.getData().getStatus(),
-                                    allureLogger.logMatcherWithText("status пользователя из ответа совпадает с status из запроса",
-                                            equalTo(createdUser.getData().getStatus()))),
-                            () -> assertThat(returnedUser.getData().getCreatedAt(),
-                                    allureLogger.logMatcherWithText("Дата создания пользователя отлична от NULL", is(notNullValue()))),
-                            () -> assertThat(returnedUser.getData().getUpdatedAt(),
-                                    allureLogger.logMatcherWithText("Дата последнего обновления пользователя отлична от", is(notNullValue()))));
-                }
-        );
-
+        step("Проверяем что метод был выполнен, код ответа и поля обекта совпадают с ожидаемыми", () -> {
+            assertAll(
+                    () -> assertThat(returnedUser.getCode(),
+                            allureLogger.logMatcherWithText("Запрос выполнен, код ответа совпадает с ожидаемым",
+                                    equalTo(200))),
+                    () -> assertThat(returnedUser.getData().getName(),
+                            allureLogger.logMatcherWithText("Имя пользователя из ответа совпадает с именем из запроса",
+                                    equalTo(createdUser.getData().getName()))),
+                    () -> assertThat(returnedUser.getData().getEmail(),
+                            allureLogger.logMatcherWithText("email пользователя из ответа совпадает с email из запроса",
+                                    equalTo(createdUser.getData().getEmail()))),
+                    () -> assertThat(returnedUser.getData().getGender(),
+                            allureLogger.logMatcherWithText("gender пользователя из ответа совпадает с gender из запроса",
+                                    equalTo(createdUser.getData().getGender()))),
+                    () -> assertThat(returnedUser.getData().getStatus(),
+                            allureLogger.logMatcherWithText("status пользователя из ответа совпадает с status из запроса",
+                                    equalTo(createdUser.getData().getStatus()))),
+                    () -> assertThat(returnedUser.getData().getCreatedAt(),
+                            allureLogger.logMatcherWithText("Дата создания пользователя отлична от NULL", is(notNullValue()))),
+                    () -> assertThat(returnedUser.getData().getUpdatedAt(),
+                            allureLogger.logMatcherWithText("Дата последнего обновления пользователя отлична от", is(notNullValue()))));
+        });
     }
 }
 
