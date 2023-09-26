@@ -4,15 +4,6 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <repositories>
-        <repository>
-            <id>central</id>
-            <name>Maven Central</name>
-            <layout>default</layout>
-            <url>https://repo1.maven.org/maven2</url>
-        </repository>
-    </repositories>
-
     <groupId>org.example</groupId>
     <artifactId>MyTestFramework</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -190,6 +181,7 @@
                     <reportVersion>2.14.0</reportVersion>
                 </configuration>
             </plugin>
+
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
@@ -205,7 +197,7 @@
                         </property>
                         <property>
                             <name>allure.results.directory</name>
-                            <value>${project.build.directory}/allure-results</value>
+                            <value>${project.basedir}/allure-results</value>
                         </property>
                     </systemProperties>
                 </configuration>
@@ -239,13 +231,13 @@
                             <modelPackage>gorest.api.users.model</modelPackage>
                             <invokerPackage>gorest.api.client</invokerPackage>
                             <packageName>gorest.api.users</packageName>
-                            <!--<modelNamePrefix></modelNamePrefix>-->
                             <generateApis>true</generateApis>
                             <generateModels>true</generateModels>
                             <generateModelTests>false</generateModelTests>
                             <generateApiTests>false</generateApiTests>
                             <generateSupportingFiles>true</generateSupportingFiles>
                             <generateApiDocumentation>false</generateApiDocumentation>
+                            <configurationFile>${project.basedir}/src/main/resources/openapi-config.json</configurationFile>
                             <configOptions>
                                 <dateLibrary>java8</dateLibrary>
                                 <useTags>true</useTags>

@@ -1,3 +1,4 @@
-.allure
 .idea
+.allure
+allure-results
 target/
