@@ -40,11 +40,4 @@ public class UserUtils {
         model.setStatus(UserStatus.ACTIVE);
         return model;
     }
-
-    /* Draft
-    public int countUsers(UsersResponse usersResponse) {
-s
-        return 0;
-    }
-    */
 }

@@ -40,8 +40,8 @@ public class UserReceptionByIdTest {
     @Test
     @DisplayName("Получение пользователя по его id")
     @AllureId("2")
-    @Epic("Получить работу в МТС")
-    @Feature("Демо для будущих коллег")
+    @Epic("Тестовое МТС")
+    @Feature("Демо")
     public void checkUserCreation() {
         CreatableUser newUserModel = userUtils.getRandomActiveMaleUserModel();
         UserResponse createdUser = userHelper.createUser(newUserModel);

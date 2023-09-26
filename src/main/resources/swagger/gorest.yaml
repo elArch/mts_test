@@ -144,10 +144,10 @@ components:
     UserGender:
       type: string
       enum:
-        - Male
-        - Female
+        - male
+        - female
     UserStatus:
       type: string
       enum:
-        - Active
-        - Inactive
+        - active
+        - inactive
